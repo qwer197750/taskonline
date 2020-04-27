@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.taskonline.sys.mapper.SubmitAnswersMapper">
+  <resultMap id="BaseResultMap" type="com.taskonline.sys.entity.SubmitAnswers">
+    <id column="sub_task_id" jdbcType="BIGINT" property="subTaskId" />
+    <id column="qid" jdbcType="BIGINT" property="qid" />
+    <result column="score" jdbcType="INTEGER" property="score" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.taskonline.sys.entity.SubmitAnswers">
+    <result column="answer" jdbcType="LONGVARCHAR" property="answer" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    sub_task_id, qid, score
+  </sql>
+  <sql id="Blob_Column_List">
+    answer
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.taskonline.sys.entity.SubmitAnswersKey" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from submit_answers
+    where sub_task_id = #{subTaskId,jdbcType=BIGINT}
+      and qid = #{qid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.taskonline.sys.entity.SubmitAnswersKey">
+    delete from submit_answers
+    where sub_task_id = #{subTaskId,jdbcType=BIGINT}
+      and qid = #{qid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.taskonline.sys.entity.SubmitAnswers">
+    insert into submit_answers (sub_task_id, qid, score, 
+      answer)
+    values (#{subTaskId,jdbcType=BIGINT}, #{qid,jdbcType=BIGINT}, #{score,jdbcType=INTEGER}, 
+      #{answer,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.taskonline.sys.entity.SubmitAnswers">
+    insert into submit_answers
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="subTaskId != null">
+        sub_task_id,
+      </if>
+      <if test="qid != null">
+        qid,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+      <if test="answer != null">
+        answer,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="subTaskId != null">
+        #{subTaskId,jdbcType=BIGINT},
+      </if>
+      <if test="qid != null">
+        #{qid,jdbcType=BIGINT},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=INTEGER},
+      </if>
+      <if test="answer != null">
+        #{answer,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.taskonline.sys.entity.SubmitAnswers">
+    update submit_answers
+    <set>
+      <if test="score != null">
+        score = #{score,jdbcType=INTEGER},
+      </if>
+      <if test="answer != null">
+        answer = #{answer,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where sub_task_id = #{subTaskId,jdbcType=BIGINT}
+      and qid = #{qid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.taskonline.sys.entity.SubmitAnswers">
+    update submit_answers
+    set score = #{score,jdbcType=INTEGER},
+      answer = #{answer,jdbcType=LONGVARCHAR}
+    where sub_task_id = #{subTaskId,jdbcType=BIGINT}
+      and qid = #{qid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.taskonline.sys.entity.SubmitAnswers">
+    update submit_answers
+    set score = #{score,jdbcType=INTEGER}
+    where sub_task_id = #{subTaskId,jdbcType=BIGINT}
+      and qid = #{qid,jdbcType=BIGINT}
+  </update>
+</mapper>

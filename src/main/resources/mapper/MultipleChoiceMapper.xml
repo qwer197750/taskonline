@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.taskonline.sys.mapper.MultipleChoiceMapper">
+  <resultMap id="BaseResultMap" type="com.taskonline.sys.entity.MultipleChoice">
+    <result column="qid" jdbcType="BIGINT" property="qid" />
+    <result column="choice_a" jdbcType="VARCHAR" property="choiceA" />
+    <result column="choice_b" jdbcType="VARCHAR" property="choiceB" />
+    <result column="choice_c" jdbcType="VARCHAR" property="choiceC" />
+    <result column="choice_d" jdbcType="VARCHAR" property="choiceD" />
+    <result column="choice_e" jdbcType="VARCHAR" property="choiceE" />
+    <result column="choice_f" jdbcType="VARCHAR" property="choiceF" />
+    <result column="choice_g" jdbcType="VARCHAR" property="choiceG" />
+    <result column="choice_h" jdbcType="VARCHAR" property="choiceH" />
+    <result column="choice_i" jdbcType="VARCHAR" property="choiceI" />
+    <result column="choice_j" jdbcType="VARCHAR" property="choiceJ" />
+  </resultMap>
+  <insert id="insert" parameterType="com.taskonline.sys.entity.MultipleChoice">
+    insert into multiple_choice (qid, choice_a, choice_b, 
+      choice_c, choice_d, choice_e, 
+      choice_f, choice_g, choice_h, 
+      choice_i, choice_j)
+    values (#{qid,jdbcType=BIGINT}, #{choiceA,jdbcType=VARCHAR}, #{choiceB,jdbcType=VARCHAR}, 
+      #{choiceC,jdbcType=VARCHAR}, #{choiceD,jdbcType=VARCHAR}, #{choiceE,jdbcType=VARCHAR}, 
+      #{choiceF,jdbcType=VARCHAR}, #{choiceG,jdbcType=VARCHAR}, #{choiceH,jdbcType=VARCHAR}, 
+      #{choiceI,jdbcType=VARCHAR}, #{choiceJ,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.taskonline.sys.entity.MultipleChoice">
+    insert into multiple_choice
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="qid != null">
+        qid,
+      </if>
+      <if test="choiceA != null">
+        choice_a,
+      </if>
+      <if test="choiceB != null">
+        choice_b,
+      </if>
+      <if test="choiceC != null">
+        choice_c,
+      </if>
+      <if test="choiceD != null">
+        choice_d,
+      </if>
+      <if test="choiceE != null">
+        choice_e,
+      </if>
+      <if test="choiceF != null">
+        choice_f,
+      </if>
+      <if test="choiceG != null">
+        choice_g,
+      </if>
+      <if test="choiceH != null">
+        choice_h,
+      </if>
+      <if test="choiceI != null">
+        choice_i,
+      </if>
+      <if test="choiceJ != null">
+        choice_j,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="qid != null">
+        #{qid,jdbcType=BIGINT},
+      </if>
+      <if test="choiceA != null">
+        #{choiceA,jdbcType=VARCHAR},
+      </if>
+      <if test="choiceB != null">
+        #{choiceB,jdbcType=VARCHAR},
+      </if>
+      <if test="choiceC != null">
+        #{choiceC,jdbcType=VARCHAR},
+      </if>
+      <if test="choiceD != null">
+        #{choiceD,jdbcType=VARCHAR},
+      </if>
+      <if test="choiceE != null">
+        #{choiceE,jdbcType=VARCHAR},
+      </if>
+      <if test="choiceF != null">
+        #{choiceF,jdbcType=VARCHAR},
+      </if>
+      <if test="choiceG != null">
+        #{choiceG,jdbcType=VARCHAR},
+      </if>
+      <if test="choiceH != null">
+        #{choiceH,jdbcType=VARCHAR},
+      </if>
+      <if test="choiceI != null">
+        #{choiceI,jdbcType=VARCHAR},
+      </if>
+      <if test="choiceJ != null">
+        #{choiceJ,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

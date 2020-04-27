@@ -1,0 +1,133 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/spring?&characterEncoding=gbk&serverTimezone=GMT%2B8
+    username: spring_administrator
+    password: qwer1977
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  http:
+    encoding:
+      force: true
+
+
+  jackson:
+    time-zone: GMT+8
+    date-format: com.fasterxml.jackson.databind.util.ISO8601DateFormat
+  jpa:
+    show-sql: true
+    database: mysql
+    generate-ddl: true
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyComponentPathImpl
+
+  devtools:
+    restart:
+      poll-interval: 3000ms
+
+  redis:
+    host: 127.0.0.1
+    port: 6379
+
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+    encoding: utf-8
+    mode: html
+    servlet:
+      content-type: text/html
+
+
+mybatis:
+  type-aliases-package: com.qwer.pojo
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true #开启后查询所有列的数据
+
+server:
+  port: 8080
+
+logging:
+  file:
+    name: D://code/logging/taskonline.log
+#    name: /home/files/logger/taskonline.log
+  level:
+    com.taskonline: trace
+    com.taskonline.entity: trace
+  pattern:
+    console: '%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{50} · %msg%n'
+    file: '%d{yyyy-MM-dd HH:mm:ss} === [%thread] === %-5level === %logger{50} - %msg%n'
+
+
+#-----------------------------------------------------------------------------------------------------------------#
+#   以上是系统配置属性，以下为程序运行常用数据
+#-----------------------------------------------------------------------------------------------------------------#
+
+iconDir: D:/code/SpringBoot/src/main/resources/static/icon
+#iconDir: /home/files/icon
+
+string:
+  #  ERROR系列消息
+  ERROR_NAME_OR_PASSWORD: 账号或密码错误
+  ERROR_LOGIN_TYPE: 错误的登录选项
+  ERROR_REGISTER_TYPE: 错误的注册选项
+  ERROR_TYPE: 请选择学生或教师登录
+
+  #  NULL系列消息
+  NULL_USER_NAME: 用户名不能为空
+  NULL_PASSWORD: 密码不能为空
+  NULL_MAP: 空的消息Map
+  NULL_TEACHER_ID : 教师ID不能为空
+  NULL_STUDENT_ID : 学生ID不能为空
+  NULL_SUBMIT_TASK_ID: 提交作业id不能为空
+  NULL_COURSE_ID: 课程id不能为空
+  NULL_TEACHER_PRIMARY_KEY: 教师数据库表id不能为空
+  NULL_STUDENT_PRIMARY_KEY: 教师数据库表id不能为空
+  NULL_TASK_ID: 作业id不能为空
+
+  #  USED系列消息
+  TEACHER_ID_USED: 教师ID已被注册
+  STUDENT_ID_USED: 学生ID已被注册
+  ADMINISTRATOR_ID_USED: 该管理员已被注册
+
+  #  FAIL系列
+  ADD_TEACHER_FAIL: 添加教师失败
+  ADD_STUDENT_FAIL: 添加学生失败
+  ADD_ADMINISTRATOR_FAIL: 添加管理员失败
+  TRANSACTION_FILE_FAIL: 上传文件时，传输失败
+  UPDATE_USER_FAIL: 修改信息失败
+
+  #  UNKNOWN系列消息
+  UNKNOWN_MESSAGE_KEY: MessageMap遇到了未知的Key：
+
+  #  EXCEPTION系列消息
+  TYPE_CHANGE_EXCEPTION: 类型转换异常：
+  ILLEGAL_STRING_FOR_NUMBER: 不能转成数字的字符串
+  UUID_FOR_REDIS_FAIL_OVER_TEN: 生成UUId写入Redis连续失败十次
+  NOT_ANNOTATION_FOR_GROUP: 需要注解格式的类用于判断校验组
+  NOT_SUITABLE_ANNOTATION_FOR_GROUP: 没有适合的组注解
+  CAPTCHA_CHECK_FAIL: 验证码错误
+
+  #  信息类消息
+  FILE_UPLOAD: 上传文件：
+  ILLEGAL_USERNAME: 用户名包含非法字符
+  ILLEGAL_PASSWORD: 密码包含非法字符
+  PASSWORD_PA_NOT_SAME: 密码与确认密码不一致
+  NAME_LENGTH_MUST: 用户名长度必须在%d和%d之间
+  PASSWORD_LENGTH_MUST: 密码长度必须在%d和%d之间
+
+database-string:
+    CHOICE_QUESTION: choice
+    MULTIPLE_QUESTION: multiple
+    SHORT_QUESTION: short
+    LONG_QUESTION: long
+
+    ACTIVE: active
+    UN_ACTIVE: unactive
+
+    MARK: 1
+    UNMARK: 0
+

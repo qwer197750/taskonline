@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.taskonline.sys.mapper.GroupMapper">
+  <resultMap id="BaseResultMap" type="com.taskonline.sys.entity.Group">
+    <id column="gid" jdbcType="BIGINT" property="gid" />
+    <result column="gname" jdbcType="VARCHAR" property="gname" />
+    <result column="describe" jdbcType="VARCHAR" property="describe" />
+    <result column="anthority" jdbcType="VARCHAR" property="anthority" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    gid, gname, describe, anthority
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from group
+    where gid = #{gid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from group
+    where gid = #{gid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.taskonline.sys.entity.Group">
+    insert into group (gid, gname, describe, 
+      anthority)
+    values (#{gid,jdbcType=BIGINT}, #{gname,jdbcType=VARCHAR}, #{describe,jdbcType=VARCHAR}, 
+      #{anthority,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.taskonline.sys.entity.Group">
+    insert into group
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="gid != null">
+        gid,
+      </if>
+      <if test="gname != null">
+        gname,
+      </if>
+      <if test="describe != null">
+        describe,
+      </if>
+      <if test="anthority != null">
+        anthority,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="gid != null">
+        #{gid,jdbcType=BIGINT},
+      </if>
+      <if test="gname != null">
+        #{gname,jdbcType=VARCHAR},
+      </if>
+      <if test="describe != null">
+        #{describe,jdbcType=VARCHAR},
+      </if>
+      <if test="anthority != null">
+        #{anthority,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.taskonline.sys.entity.Group">
+    update group
+    <set>
+      <if test="gname != null">
+        gname = #{gname,jdbcType=VARCHAR},
+      </if>
+      <if test="describe != null">
+        describe = #{describe,jdbcType=VARCHAR},
+      </if>
+      <if test="anthority != null">
+        anthority = #{anthority,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where gid = #{gid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.taskonline.sys.entity.Group">
+    update group
+    set gname = #{gname,jdbcType=VARCHAR},
+      describe = #{describe,jdbcType=VARCHAR},
+      anthority = #{anthority,jdbcType=VARCHAR}
+    where gid = #{gid,jdbcType=BIGINT}
+  </update>
+</mapper>

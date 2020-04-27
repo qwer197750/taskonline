@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.taskonline.sys.mapper.StuCoursesMapper">
+  <resultMap id="BaseResultMap" type="com.taskonline.sys.entity.StuCourses">
+    <id column="sid" jdbcType="BIGINT" property="sid" />
+    <id column="cid" jdbcType="BIGINT" property="cid" />
+    <result column="select_time" jdbcType="TIMESTAMP" property="selectTime" />
+    <result column="course_appraise" jdbcType="VARCHAR" property="courseAppraise" />
+    <result column="course_score" jdbcType="INTEGER" property="courseScore" />
+    <result column="is_pass" jdbcType="BIT" property="isPass" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    sid, cid, select_time, course_appraise, course_score, is_pass
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.taskonline.sys.entity.StuCoursesKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from stu_courses
+    where sid = #{sid,jdbcType=BIGINT}
+      and cid = #{cid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.taskonline.sys.entity.StuCoursesKey">
+    delete from stu_courses
+    where sid = #{sid,jdbcType=BIGINT}
+      and cid = #{cid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.taskonline.sys.entity.StuCourses">
+    insert into stu_courses (sid, cid, select_time, 
+      course_appraise, course_score, is_pass
+      )
+    values (#{sid,jdbcType=BIGINT}, #{cid,jdbcType=BIGINT}, #{selectTime,jdbcType=TIMESTAMP}, 
+      #{courseAppraise,jdbcType=VARCHAR}, #{courseScore,jdbcType=INTEGER}, #{isPass,jdbcType=BIT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.taskonline.sys.entity.StuCourses">
+    insert into stu_courses
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sid != null">
+        sid,
+      </if>
+      <if test="cid != null">
+        cid,
+      </if>
+      <if test="selectTime != null">
+        select_time,
+      </if>
+      <if test="courseAppraise != null">
+        course_appraise,
+      </if>
+      <if test="courseScore != null">
+        course_score,
+      </if>
+      <if test="isPass != null">
+        is_pass,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sid != null">
+        #{sid,jdbcType=BIGINT},
+      </if>
+      <if test="cid != null">
+        #{cid,jdbcType=BIGINT},
+      </if>
+      <if test="selectTime != null">
+        #{selectTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="courseAppraise != null">
+        #{courseAppraise,jdbcType=VARCHAR},
+      </if>
+      <if test="courseScore != null">
+        #{courseScore,jdbcType=INTEGER},
+      </if>
+      <if test="isPass != null">
+        #{isPass,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.taskonline.sys.entity.StuCourses">
+    update stu_courses
+    <set>
+      <if test="selectTime != null">
+        select_time = #{selectTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="courseAppraise != null">
+        course_appraise = #{courseAppraise,jdbcType=VARCHAR},
+      </if>
+      <if test="courseScore != null">
+        course_score = #{courseScore,jdbcType=INTEGER},
+      </if>
+      <if test="isPass != null">
+        is_pass = #{isPass,jdbcType=BIT},
+      </if>
+    </set>
+    where sid = #{sid,jdbcType=BIGINT}
+      and cid = #{cid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.taskonline.sys.entity.StuCourses">
+    update stu_courses
+    set select_time = #{selectTime,jdbcType=TIMESTAMP},
+      course_appraise = #{courseAppraise,jdbcType=VARCHAR},
+      course_score = #{courseScore,jdbcType=INTEGER},
+      is_pass = #{isPass,jdbcType=BIT}
+    where sid = #{sid,jdbcType=BIGINT}
+      and cid = #{cid,jdbcType=BIGINT}
+  </update>
+</mapper>

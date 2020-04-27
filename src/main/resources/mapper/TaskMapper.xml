@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.taskonline.sys.mapper.TaskMapper">
+  <resultMap id="BaseResultMap" type="com.taskonline.sys.entity.Task">
+    <id column="task_id" jdbcType="BIGINT" property="taskId" />
+    <result column="task_name" jdbcType="VARCHAR" property="taskName" />
+    <result column="cid" jdbcType="BIGINT" property="cid" />
+    <result column="score" jdbcType="INTEGER" property="score" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="is_short_auto_check_answer" jdbcType="BIT" property="isShortAutoCheckAnswer" />
+    <result column="is_show_answer" jdbcType="BIT" property="isShowAnswer" />
+    <result column="when_show_answer" jdbcType="VARCHAR" property="whenShowAnswer" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    task_id, task_name, cid, score, create_time, end_time, is_short_auto_check_answer, 
+    is_show_answer, when_show_answer
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from task
+    where task_id = #{taskId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from task
+    where task_id = #{taskId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.taskonline.sys.entity.Task">
+    <selectKey keyProperty="taskId" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into task (task_id, task_name, cid, 
+      score, create_time, end_time, 
+      is_short_auto_check_answer, is_show_answer, when_show_answer
+      )
+    values (#{taskId,jdbcType=BIGINT}, #{taskName,jdbcType=VARCHAR}, #{cid,jdbcType=BIGINT}, 
+      #{score,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, 
+      #{isShortAutoCheckAnswer,jdbcType=BIT}, #{isShowAnswer,jdbcType=BIT}, #{whenShowAnswer,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.taskonline.sys.entity.Task">
+    <selectKey keyProperty="taskId" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into task
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      task_id,
+      <if test="taskName != null">
+        task_name,
+      </if>
+      <if test="cid != null">
+        cid,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="endTime != null">
+        end_time,
+      </if>
+      <if test="isShortAutoCheckAnswer != null">
+        is_short_auto_check_answer,
+      </if>
+      <if test="isShowAnswer != null">
+        is_show_answer,
+      </if>
+      <if test="whenShowAnswer != null">
+        when_show_answer,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      #{taskId,jdbcType=BIGINT},
+      <if test="taskName != null">
+        #{taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="cid != null">
+        #{cid,jdbcType=BIGINT},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isShortAutoCheckAnswer != null">
+        #{isShortAutoCheckAnswer,jdbcType=BIT},
+      </if>
+      <if test="isShowAnswer != null">
+        #{isShowAnswer,jdbcType=BIT},
+      </if>
+      <if test="whenShowAnswer != null">
+        #{whenShowAnswer,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.taskonline.sys.entity.Task">
+    update task
+    <set>
+      <if test="taskName != null">
+        task_name = #{taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="cid != null">
+        cid = #{cid,jdbcType=BIGINT},
+      </if>
+      <if test="score != null">
+        score = #{score,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isShortAutoCheckAnswer != null">
+        is_short_auto_check_answer = #{isShortAutoCheckAnswer,jdbcType=BIT},
+      </if>
+      <if test="isShowAnswer != null">
+        is_show_answer = #{isShowAnswer,jdbcType=BIT},
+      </if>
+      <if test="whenShowAnswer != null">
+        when_show_answer = #{whenShowAnswer,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where task_id = #{taskId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.taskonline.sys.entity.Task">
+    update task
+    set task_name = #{taskName,jdbcType=VARCHAR},
+      cid = #{cid,jdbcType=BIGINT},
+      score = #{score,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      is_short_auto_check_answer = #{isShortAutoCheckAnswer,jdbcType=BIT},
+      is_show_answer = #{isShowAnswer,jdbcType=BIT},
+      when_show_answer = #{whenShowAnswer,jdbcType=VARCHAR}
+    where task_id = #{taskId,jdbcType=BIGINT}
+  </update>
+</mapper>

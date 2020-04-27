@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <script src="/js/jquery-3.3.1.js"></script>
+    <link href="/css/sweetalert.css" rel="stylesheet">
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/js/xtalert.js"></script>
+    <script src="/js/sweetalert.min.js"></script>
+    <title>标题</title>
+</head>
+<body>
+内容
+<!--thymeleaf下的非前后端分离的消息显示-->
+<div th:if="${msg}  != null">
+    <span id="showMsg" hidden="hidden" th:text="${msg}"></span>
+    <script type="text/javascript">
+        xtalert.alertInfo($("#showMsg").text());
+    </script>
+</div>
+</body>
+</html>

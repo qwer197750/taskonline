@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!-- 数据库驱动 -->
+    <!--<classPathEntry-->
+    <!--location="mysql-connector-java-5.1.38.jar" />-->
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+        <commentGenerator>
+            <property name="suppressDate" value="true" />
+            <!-- 是否去除自动生成的注释 true：是 ： true:否 -->
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+        <!--数据库链接URL，用户名、密码 -->
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost/spring?characterEncoding=utf8&amp;serverTimezone=UTC&amp;nullCatalogMeansCurrent=true"
+                        userId="spring_administrator" password="qwer1977">
+        </jdbcConnection>
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="true" />
+        </javaTypeResolver>
+        <!-- 生成模型的包名和位置 -->
+        <javaModelGenerator
+                targetPackage="com.taskonline.sys.entity"
+                targetProject="D:\code\SpringBoot\src\main\java">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+        <!-- 生成映射文件的包名和位置 -->
+        <sqlMapGenerator
+                targetPackage="mapper"
+                targetProject="D:\code\SpringBoot\src\main\resources">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+
+        <!-- 生成的Mapper接口的路径 -->
+        <javaClientGenerator type="XMLMAPPER"
+                             targetPackage="com.taskonline.sys.mapper"
+                             targetProject="D:\code\SpringBoot\src\main\java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="rootClass" value="com.springboot.mybatis.demo.mapper.common.BaseMapper"/>
+        </javaClientGenerator>
+
+        <!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名 -->
+        <!--管理员、权限组-->
+        <table tableName="administrator" domainObjectName="Administrator"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false"/>
+        <table tableName="group" domainObjectName="Group"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false"/>
+
+        <!--教师、学生-->
+        <table tableName="tea" domainObjectName="Teacher"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false"/>
+        <table tableName="stu" domainObjectName="Student"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false"/>
+
+        <!--课程、学生选课-->
+        <table tableName="course" domainObjectName="Course"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false"/>
+        <table tableName="stu_courses" domainObjectName="StuCourses"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false"/>
+
+        <!--作业-->
+        <table tableName="task" domainObjectName="Task"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <generatedKey column="task_id"  order="AFTER" sqlStatement="SELECT LAST_INSERT_ID()"/>
+        </table>
+
+        <!--问题、单选扩展、多选扩展、简答扩展、详答扩展(简答和详答扩展在question中内置)-->
+        <table tableName="question" domainObjectName="Question"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <generatedKey column="qid"  order="AFTER" sqlStatement="SELECT LAST_INSERT_ID()"/>
+        </table>
+        <table tableName="choice" domainObjectName="Choice"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false"/>
+        <table tableName="multiple_choice" domainObjectName="MultipleChoice"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false"/>
+
+        <!--提交作业、提交问题-->
+        <table tableName="submit_tasks" domainObjectName="SubmitTasks"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <generatedKey column="sub_task_id" order="AFTER" sqlStatement="SELECT LAST_INSERT_ID()"/>
+        </table>
+        <table tableName="submit_answers" domainObjectName="SubmitAnswers"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false"/>
+    </context>
+
+</generatorConfiguration>

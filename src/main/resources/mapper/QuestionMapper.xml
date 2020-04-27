@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.taskonline.sys.mapper.QuestionMapper">
+  <resultMap id="BaseResultMap" type="com.taskonline.sys.entity.Question">
+    <id column="qid" jdbcType="BIGINT" property="qid" />
+    <result column="seq_num" jdbcType="INTEGER" property="seqNum" />
+    <result column="task_id" jdbcType="BIGINT" property="taskId" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="answer" jdbcType="VARCHAR" property="answer" />
+    <result column="score" jdbcType="INTEGER" property="score" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    qid, seq_num, task_id, content, answer, score, type
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from question
+    where qid = #{qid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from question
+    where qid = #{qid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.taskonline.sys.entity.Question">
+    <selectKey keyProperty="qid" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into question (qid, seq_num, task_id, 
+      content, answer, score, 
+      type)
+    values (#{qid,jdbcType=BIGINT}, #{seqNum,jdbcType=INTEGER}, #{taskId,jdbcType=BIGINT}, 
+      #{content,jdbcType=VARCHAR}, #{answer,jdbcType=VARCHAR}, #{score,jdbcType=INTEGER}, 
+      #{type,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.taskonline.sys.entity.Question">
+    <selectKey keyProperty="qid" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into question
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      qid,
+      <if test="seqNum != null">
+        seq_num,
+      </if>
+      <if test="taskId != null">
+        task_id,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="answer != null">
+        answer,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      #{qid,jdbcType=BIGINT},
+      <if test="seqNum != null">
+        #{seqNum,jdbcType=INTEGER},
+      </if>
+      <if test="taskId != null">
+        #{taskId,jdbcType=BIGINT},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="answer != null">
+        #{answer,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.taskonline.sys.entity.Question">
+    update question
+    <set>
+      <if test="seqNum != null">
+        seq_num = #{seqNum,jdbcType=INTEGER},
+      </if>
+      <if test="taskId != null">
+        task_id = #{taskId,jdbcType=BIGINT},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="answer != null">
+        answer = #{answer,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        score = #{score,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where qid = #{qid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.taskonline.sys.entity.Question">
+    update question
+    set seq_num = #{seqNum,jdbcType=INTEGER},
+      task_id = #{taskId,jdbcType=BIGINT},
+      content = #{content,jdbcType=VARCHAR},
+      answer = #{answer,jdbcType=VARCHAR},
+      score = #{score,jdbcType=INTEGER},
+      type = #{type,jdbcType=VARCHAR}
+    where qid = #{qid,jdbcType=BIGINT}
+  </update>
+</mapper>

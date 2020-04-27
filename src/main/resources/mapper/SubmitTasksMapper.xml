@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.taskonline.sys.mapper.SubmitTasksMapper">
+  <resultMap id="BaseResultMap" type="com.taskonline.sys.entity.SubmitTasks">
+    <id column="sub_task_id" jdbcType="BIGINT" property="subTaskId" />
+    <result column="sid" jdbcType="BIGINT" property="sid" />
+    <result column="task_id" jdbcType="BIGINT" property="taskId" />
+    <result column="submit_time" jdbcType="TIMESTAMP" property="submitTime" />
+    <result column="is_tea_mark" jdbcType="BIT" property="isTeaMark" />
+    <result column="score" jdbcType="INTEGER" property="score" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    sub_task_id, sid, task_id, submit_time, is_tea_mark, score
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from submit_tasks
+    where sub_task_id = #{subTaskId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from submit_tasks
+    where sub_task_id = #{subTaskId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.taskonline.sys.entity.SubmitTasks">
+    <selectKey keyProperty="subTaskId" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into submit_tasks (sub_task_id, sid, task_id, 
+      submit_time, is_tea_mark, score
+      )
+    values (#{subTaskId,jdbcType=BIGINT}, #{sid,jdbcType=BIGINT}, #{taskId,jdbcType=BIGINT}, 
+      #{submitTime,jdbcType=TIMESTAMP}, #{isTeaMark,jdbcType=BIT}, #{score,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.taskonline.sys.entity.SubmitTasks">
+    <selectKey keyProperty="subTaskId" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into submit_tasks
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      sub_task_id,
+      <if test="sid != null">
+        sid,
+      </if>
+      <if test="taskId != null">
+        task_id,
+      </if>
+      <if test="submitTime != null">
+        submit_time,
+      </if>
+      <if test="isTeaMark != null">
+        is_tea_mark,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      #{subTaskId,jdbcType=BIGINT},
+      <if test="sid != null">
+        #{sid,jdbcType=BIGINT},
+      </if>
+      <if test="taskId != null">
+        #{taskId,jdbcType=BIGINT},
+      </if>
+      <if test="submitTime != null">
+        #{submitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isTeaMark != null">
+        #{isTeaMark,jdbcType=BIT},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.taskonline.sys.entity.SubmitTasks">
+    update submit_tasks
+    <set>
+      <if test="sid != null">
+        sid = #{sid,jdbcType=BIGINT},
+      </if>
+      <if test="taskId != null">
+        task_id = #{taskId,jdbcType=BIGINT},
+      </if>
+      <if test="submitTime != null">
+        submit_time = #{submitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isTeaMark != null">
+        is_tea_mark = #{isTeaMark,jdbcType=BIT},
+      </if>
+      <if test="score != null">
+        score = #{score,jdbcType=INTEGER},
+      </if>
+    </set>
+    where sub_task_id = #{subTaskId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.taskonline.sys.entity.SubmitTasks">
+    update submit_tasks
+    set sid = #{sid,jdbcType=BIGINT},
+      task_id = #{taskId,jdbcType=BIGINT},
+      submit_time = #{submitTime,jdbcType=TIMESTAMP},
+      is_tea_mark = #{isTeaMark,jdbcType=BIT},
+      score = #{score,jdbcType=INTEGER}
+    where sub_task_id = #{subTaskId,jdbcType=BIGINT}
+  </update>
+</mapper>

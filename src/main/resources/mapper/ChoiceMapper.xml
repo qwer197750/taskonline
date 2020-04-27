@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.taskonline.sys.mapper.ChoiceMapper">
+  <resultMap id="BaseResultMap" type="com.taskonline.sys.entity.Choice">
+    <id column="qid" jdbcType="BIGINT" property="qid" />
+    <result column="choice_a" jdbcType="VARCHAR" property="choiceA" />
+    <result column="choice_b" jdbcType="VARCHAR" property="choiceB" />
+    <result column="choice_c" jdbcType="VARCHAR" property="choiceC" />
+    <result column="choice_d" jdbcType="VARCHAR" property="choiceD" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    qid, choice_a, choice_b, choice_c, choice_d
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from choice
+    where qid = #{qid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from choice
+    where qid = #{qid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.taskonline.sys.entity.Choice">
+    insert into choice (qid, choice_a, choice_b, 
+      choice_c, choice_d)
+    values (#{qid,jdbcType=BIGINT}, #{choiceA,jdbcType=VARCHAR}, #{choiceB,jdbcType=VARCHAR}, 
+      #{choiceC,jdbcType=VARCHAR}, #{choiceD,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.taskonline.sys.entity.Choice">
+    insert into choice
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="qid != null">
+        qid,
+      </if>
+      <if test="choiceA != null">
+        choice_a,
+      </if>
+      <if test="choiceB != null">
+        choice_b,
+      </if>
+      <if test="choiceC != null">
+        choice_c,
+      </if>
+      <if test="choiceD != null">
+        choice_d,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="qid != null">
+        #{qid,jdbcType=BIGINT},
+      </if>
+      <if test="choiceA != null">
+        #{choiceA,jdbcType=VARCHAR},
+      </if>
+      <if test="choiceB != null">
+        #{choiceB,jdbcType=VARCHAR},
+      </if>
+      <if test="choiceC != null">
+        #{choiceC,jdbcType=VARCHAR},
+      </if>
+      <if test="choiceD != null">
+        #{choiceD,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.taskonline.sys.entity.Choice">
+    update choice
+    <set>
+      <if test="choiceA != null">
+        choice_a = #{choiceA,jdbcType=VARCHAR},
+      </if>
+      <if test="choiceB != null">
+        choice_b = #{choiceB,jdbcType=VARCHAR},
+      </if>
+      <if test="choiceC != null">
+        choice_c = #{choiceC,jdbcType=VARCHAR},
+      </if>
+      <if test="choiceD != null">
+        choice_d = #{choiceD,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where qid = #{qid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.taskonline.sys.entity.Choice">
+    update choice
+    set choice_a = #{choiceA,jdbcType=VARCHAR},
+      choice_b = #{choiceB,jdbcType=VARCHAR},
+      choice_c = #{choiceC,jdbcType=VARCHAR},
+      choice_d = #{choiceD,jdbcType=VARCHAR}
+    where qid = #{qid,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.taskonline.sys.mapper.AdministratorMapper">
+  <resultMap id="BaseResultMap" type="com.taskonline.sys.entity.Administrator">
+    <id column="aid" jdbcType="BIGINT" property="aid" />
+    <result column="aname" jdbcType="VARCHAR" property="aname" />
+    <result column="register_time" jdbcType="TIMESTAMP" property="registerTime" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+    <result column="gid" jdbcType="BIGINT" property="gid" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    aid, aname, register_time, icon, last_login_time, gid, password
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from administrator
+    where aid = #{aid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from administrator
+    where aid = #{aid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.taskonline.sys.entity.Administrator">
+    insert into administrator (aid, aname, register_time, 
+      icon, last_login_time, gid, 
+      password)
+    values (#{aid,jdbcType=BIGINT}, #{aname,jdbcType=VARCHAR}, #{registerTime,jdbcType=TIMESTAMP}, 
+      #{icon,jdbcType=VARCHAR}, #{lastLoginTime,jdbcType=TIMESTAMP}, #{gid,jdbcType=BIGINT}, 
+      #{password,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.taskonline.sys.entity.Administrator">
+    insert into administrator
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="aid != null">
+        aid,
+      </if>
+      <if test="aname != null">
+        aname,
+      </if>
+      <if test="registerTime != null">
+        register_time,
+      </if>
+      <if test="icon != null">
+        icon,
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time,
+      </if>
+      <if test="gid != null">
+        gid,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="aid != null">
+        #{aid,jdbcType=BIGINT},
+      </if>
+      <if test="aname != null">
+        #{aname,jdbcType=VARCHAR},
+      </if>
+      <if test="registerTime != null">
+        #{registerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="icon != null">
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginTime != null">
+        #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gid != null">
+        #{gid,jdbcType=BIGINT},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.taskonline.sys.entity.Administrator">
+    update administrator
+    <set>
+      <if test="aname != null">
+        aname = #{aname,jdbcType=VARCHAR},
+      </if>
+      <if test="registerTime != null">
+        register_time = #{registerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="icon != null">
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gid != null">
+        gid = #{gid,jdbcType=BIGINT},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where aid = #{aid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.taskonline.sys.entity.Administrator">
+    update administrator
+    set aname = #{aname,jdbcType=VARCHAR},
+      register_time = #{registerTime,jdbcType=TIMESTAMP},
+      icon = #{icon,jdbcType=VARCHAR},
+      last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      gid = #{gid,jdbcType=BIGINT},
+      password = #{password,jdbcType=VARCHAR}
+    where aid = #{aid,jdbcType=BIGINT}
+  </update>
+</mapper>
